@@ -34,7 +34,9 @@
         }
 
         function getRandomArticle() {
-            let article = articles.pop([Math.floor(Math.random() * Math.floor(articles.length))]);            
+            let index = Math.floor(Math.random() * Math.floor(articles.length));
+            let article = articles.splice(index, 1);
+                        
             $("#article").text(article);
             createCookie(JSON.stringify(articles));
         }
@@ -52,7 +54,12 @@
             $("#form").submit(e => {
 
                 e.preventDefault();
-                articles.push($("#wiki_title").val());
+                let title = $("#wiki_title").val();
+                if(!title || articles.includes(title)){
+                    return false;
+                }
+
+                articles.push(title);
                 createCookie(JSON.stringify(articles));
 
                 $("#wiki_title").val("");
