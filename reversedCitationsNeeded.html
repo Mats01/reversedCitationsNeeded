@@ -1,0 +1,128 @@
+<html>
+<head>
+    <title>
+        Citations needed
+    </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    
+    <script>
+        let articles = [];
+
+        function createCookie(val){
+            let expires = new Date();
+            expires.setDate(expires.getDate() + 2);
+            document.cookie = `articles=${val}; path=/; expires=${expires}`;
+            $("#articles").text(articles.length);
+
+        }
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for(let i = 0; i <ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function getRandomArticle() {
+            let article = articles.pop([Math.floor(Math.random() * Math.floor(articles.length))]);            
+            $("#article").text(article);
+            createCookie('articles', JSON.stringify(articles));
+        }
+
+
+        $("document").ready(a => {
+            let cookieData = getCookie('articles');
+            if (cookieData) {
+                articles = JSON.parse(cookieData);
+            }
+
+            $("#articles").text(articles.length);
+            $("#form").submit(e => {
+                //alert(e);
+                e.preventDefault();
+                articles.push($("#wiki_title").val());
+                createCookie('articles', JSON.stringify(articles), 2);
+
+                $("#wiki_title").val("");
+                $("#articles").text(articles.length);
+
+                return false;
+            });
+
+        });
+
+        
+        
+    
+    </script>
+    <style>
+        .section {
+            height: auto;
+            padding: 60px 0;
+            width: 100%;
+            display: flex;
+            align-content: center;
+            align-items: center;
+            text-align: center;
+            flex-direction: column;
+
+        }
+        form {
+            width: 60%;
+            min-width: 1000px;
+            height: auto;
+            margin: auto;
+            display: flex;
+            align-content: center;
+            align-items: center;
+            text-align: center;
+            flex-direction: column;
+            padding: 0;
+        }
+        form > input {
+            width: 50%;
+            min-width: 600px;
+            padding: 6px;
+            
+    
+        }
+        button {
+            border-radius: 3px;
+            box-shadow: 0;
+            border: 0;
+            margin: 20px;
+            min-width: 200px;
+            min-height: 40px;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="section">
+        <h1 id="article"></h1>
+        <form id="form">
+            <input id="wiki_title" type="text" placeholder="wiki title">
+            <button class="btn-primary">Submit</button>
+        </form>
+        <div>
+            
+            <button class="btn-success" onclick="getRandomArticle()">Random</button>
+                        
+        </div>
+
+    </div>
+    <p>Articles: <span id="articles"></span></p>
+
+</body>
+
+</html>
