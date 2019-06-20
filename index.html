@@ -44,11 +44,13 @@
             let cookieData = getCookie('articles');
             if (cookieData) {
                 articles = JSON.parse(cookieData);
+                $("#articles").text(articles.length);
+
             }
 
             $("#articles").text(articles.length);
             $("#form").submit(e => {
-                //alert(e);
+
                 e.preventDefault();
                 articles.push($("#wiki_title").val());
                 createCookie('articles', JSON.stringify(articles), 2);
@@ -104,6 +106,9 @@
             min-width: 200px;
             min-height: 40px;
 
+        }
+        p {
+            padding: 0 10px;
         }
     </style>
 </head>
