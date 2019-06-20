@@ -68,22 +68,27 @@
     
     </script>
     <style>
+        body {
+            font-family: Helvetica, sans-serif;
+        }
         .section {
             height: auto;
-            padding: 60px 0;
+            box-sizing: border-box;
             width: 100%;
             display: flex;
             align-content: center;
             align-items: center;
             text-align: center;
             flex-direction: column;
+            justify-content: center;
+            height: 90vh;
+
 
         }
         form {
-            width: 60%;
-            min-width: 1000px;
-            height: auto;
-            margin: auto;
+            width: 50%;
+            min-width: 340px;
+            margin: 10px auto;
             display: flex;
             align-content: center;
             align-items: center;
@@ -92,9 +97,9 @@
             padding: 0;
         }
         form > input {
-            width: 50%;
-            min-width: 600px;
+            width: 100%;
             padding: 6px;
+            
             
     
         }
@@ -103,27 +108,49 @@
             box-shadow: 0;
             border: 0;
             margin: 20px;
-            min-width: 200px;
+            min-width: 140px;
             min-height: 40px;
 
         }
         p {
             padding: 0 10px;
         }
+        .button_div {
+
+            width: 100%;
+            display: flex;
+            align-content: center;
+            align-items: center;
+            text-align: center;
+            flex-direction: row;
+            justify-content: center;
+
+        }
+        h1 {
+            height: 40px;
+            margin: -80px 0 40px 0;
+
+        }
     </style>
+
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+
 </head>
 <body>
     <div class="section">
         <h1 id="article"></h1>
         <form id="form">
             <input id="wiki_title" type="text" placeholder="wiki title">
-            <button class="btn-primary">Submit</button>
         </form>
-        <div>
+        <div class="button_div">
+            <button class="btn-primary" onclick="$('#form').submit()">Submit</button>
+
             
             <button class="btn-success" onclick="getRandomArticle()">Random</button>
                         
         </div>
+
 
     </div>
     <p>Articles: <span id="articles"></span></p>
