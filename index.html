@@ -120,6 +120,8 @@
 
 
                     articles.push(title);
+                    createCookie(JSON.stringify(articles));
+
 
                     $("#wiki_title").val("");
                     $("#articles").text(articles.length);
@@ -139,7 +141,6 @@
                 return;
             }
         })
-        createCookie(JSON.stringify(articles));
 
             
         
