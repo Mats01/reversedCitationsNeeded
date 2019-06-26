@@ -18,7 +18,7 @@
        // $(".article_container").text(data.title + data.revisions[0]);
        title = title.replace(/\s+/g, '_');
         WIKIPEDIA.getData(`https://en.wikipedia.org/wiki/${title}`, info =>{
-            $(".article_container").text(info.summary.title + " ---- \n \n" + info.summary.description);
+            $(".article_container").text(info.summary.title + "\n ----- \n" + info.summary.description);
             $("#article_link").attr('href', `https://en.wikipedia.org/wiki/${title}`);
             console.log(info);
             console.log(data);

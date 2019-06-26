@@ -1,17 +1,21 @@
 body {
     font-family: Helvetica, sans-serif;
+    box-sizing: border-box;
+    padding: 10px;
 }
 .section {
     height: auto;
     box-sizing: border-box;
-    min-width: 100%;
+    padding: 20px;
+    width: 100%;
+    max-width: 100%;
     display: flex;
     align-content: center;
     align-items: center;
     text-align: center;
     flex-direction: column;
     justify-content: center;
-    height: 90vh;
+    min-height: 90vh;
 
 
 }
@@ -62,6 +66,12 @@ p {
 h1 {
     height: 40px;
     margin: -80px 0 40px 0;
+    font-size: 2em;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    width: 90%;
+    padding-bottom: 70px;
+
 
 }
 a{
@@ -72,4 +82,9 @@ a{
 
     margin: 10px;
 
+}
+
+.article_container{
+    white-space: pre-line;
+    text-align: justify;
 }
