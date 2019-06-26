@@ -104,7 +104,7 @@
 
     function checkTitle(title, position){
         let words = title.split(" "); 
-        if(words.length > 2){
+        if(words.length > 2 || title.includes("(")){
             getRandomTitle();
             return;
         }
