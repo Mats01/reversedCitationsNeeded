@@ -21,7 +21,7 @@ body {
 }
 form {
     width: 50%;
-    min-width: 340px;
+    min-width: 316px;
     margin: 10px auto;
     display: flex;
     align-content: center;
