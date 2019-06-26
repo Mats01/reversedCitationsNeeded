@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="wikiScript.js"></script>
 
     
     <script>
@@ -71,196 +72,36 @@
 
         });
 
+        //wiki
+
+        function returnArticle(title){
+            if(!title || articles.includes(title)){
+                    return false;
+                }
+
+
+
+                articles.push(title);
+                createCookie(JSON.stringify(articles));
+
+
+                $("#wiki_title").val("");
+                $("#articles").text(articles.length);
+        }
+
         
         
     
     </script>
 
-    <script>
-    // wiki script
-    let randomTitle = "";
-    function getRandomTitle(){
-
-        $.ajax({
-            type: "GET",
-            url: "https://en.wikipedia.org/w/api.php?origin=*&format=json&action=query&generator=random&grnnamespace=0&prop=revisions|images&rvprop=content",
-            contentType: "application/json; charset=utf-8",
-            async: false,
-            dataType: "json",
-            success: function (data, textStatus, jqXHR) {
-
-                let pages = data.query.pages;
-                let firstKey = Object.keys(pages)[0];
-                let title = pages[firstKey].title;
-                console.log(title);
-                checkTitle(title, 0);
-
-            },
-            error: function (errorMessage) {
-            }
-
-        });
-    }
-
-    function checkTitle(title, position){
-        let words = title.split(" "); 
-        if(words.length > 2 || title.includes("(")){
-            getRandomTitle();
-            return;
-        }
-
-        ajaxWiktionary(words[position], val => {
-            if(val == -1){
-                if(position == words.length-1){
-                    // $("#article").text(title);
-                    
-                    if(!title || articles.includes(title)){
-                        return false;
-                    }
-
-
-                    articles.push(title);
-                    createCookie(JSON.stringify(articles));
-
-
-                    $("#wiki_title").val("");
-                    $("#articles").text(articles.length);
-
-
-
-                }
-                else {
-                    checkTitle(title, 1);
-                }
-                   
-
-
-            }
-            else {
-                getRandomTitle();
-                return;
-            }
-        })
-
-            
-        
-        
-
-
-
-        
-        
-
-        
-        
-    }
-
-    function ajaxWiktionary(word, callback){
-        // https://en.wiktionary.org/w/api.php?action=query&titles=Bolbelasmus
-        $.ajax({
-            type: "GET",
-            url: `https://en.wiktionary.org/w/api.php?action=query&titles=${word}&callback=?&_=1561564990200&format=json`,
-            contentType: "application/json; charset=utf-8",
-            async: false,
-            dataType: "json",
-            success: function (data, textStatus, jqXHR) {
-                let pages = data.query.pages;
-                
-                let firstKey = Object.keys(pages)[0];
-                callback(firstKey);
-                
-
-                
-            },
-            error: function (errorMessage) {
-            }
-
-        });
-
-
-    }
-
-
-    
-
-    </script>
-    <style>
-        body {
-            font-family: Helvetica, sans-serif;
-        }
-        .section {
-            height: auto;
-            box-sizing: border-box;
-            width: 100%;
-            display: flex;
-            align-content: center;
-            align-items: center;
-            text-align: center;
-            flex-direction: column;
-            justify-content: center;
-            height: 90vh;
-
-
-        }
-        form {
-            width: 50%;
-            min-width: 340px;
-            margin: 10px auto;
-            display: flex;
-            align-content: center;
-            align-items: center;
-            text-align: center;
-            flex-direction: column;
-            padding: 0;
-        }
-        form > input {
-            width: 100%;
-            padding: 6px;
-            
-            
-    
-        }
-        button {
-            border-radius: 3px;
-            box-shadow: 0;
-            border: 0;
-            margin: 20px;
-            min-width: 140px;
-            min-height: 40px;
-
-        }
-        p {
-            padding: 0 10px;
-            position: absolute;
-            bottom: 10px;
-            left: 5px;
-        }
-        .button_div {
-
-            width: 100%;
-            display: flex;
-            align-content: center;
-            align-items: center;
-            text-align: center;
-            flex-direction: row;
-            justify-content: center;
-
-        }
-        h1 {
-            height: 40px;
-            margin: -80px 0 40px 0;
-
-        }
-        a{
-            margin: 35 0 -40 0;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 
     <meta content="width=device-width, initial-scale=1" name="viewport">
 
 
 </head>
 <body>
+    <a href="wikirandomizer.html">wiki randomizer</a>
     <div class="section">
         <h1 id="article"></h1>
         <form id="form">
