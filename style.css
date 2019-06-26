@@ -20,8 +20,8 @@ body {
 
 }
 form {
-    width: 50%;
-    min-width: 316px;
+    width: 100%;
+    max-width: 900px;
     margin: 10px auto;
     display: flex;
     align-content: center;
