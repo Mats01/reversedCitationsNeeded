@@ -87,4 +87,14 @@ a{
 .article_container{
     white-space: pre-line;
     text-align: justify;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    width: 100%;
+}
+
+.article_title{
+    text-align: left;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    width: 100%;
 }
