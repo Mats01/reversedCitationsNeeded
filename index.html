@@ -126,8 +126,7 @@
             
 
     </div>
-    <p>Articles: <span id="articles"></span> </p>
-    <p>version 2.0.2</p>
+    <p>version 2.0.3 Articles: <span id="articles"></span> </p>
     <script>
         // This is the "Offline page" service worker
 
@@ -140,9 +139,7 @@
             } else {
                 // Register the service worker
                 navigator.serviceWorker
-                    .register("pwabuilder-sw.js", {
-                        scope: "./"
-                    })
+                    .register("/pwabuilder-sw.js")
                     .then(function (reg) {
                         console.log("[PWA Builder] Service worker has been registered for scope: " + reg.scope);
                     });
