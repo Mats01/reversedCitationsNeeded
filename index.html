@@ -1,18 +1,21 @@
 <html>
+
 <head>
     <title>
         Citations needed
     </title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="wikiScript.js"></script>
+    <link rel='manifest' href='/manifest.json'>
+    <link rel="shortcut icon" type="image/png" href="favicon.png"/>
 
-    
     <script>
         let articles = [];
 
-        function createCookie(val){
+        function createCookie(val) {
             let expires = new Date();
             expires.setDate(expires.getDate() + 2);
             document.cookie = `articles=${val}; path=/; expires=${expires}`;
@@ -23,13 +26,13 @@
             let name = cname + "=";
             let decodedCookie = decodeURIComponent(document.cookie);
             let ca = decodedCookie.split(';');
-            for(let i = 0; i <ca.length; i++) {
+            for (let i = 0; i < ca.length; i++) {
                 let c = ca[i];
                 while (c.charAt(0) == ' ') {
-                c = c.substring(1);
+                    c = c.substring(1);
                 }
                 if (c.indexOf(name) == 0) {
-                return c.substring(name.length, c.length);
+                    return c.substring(name.length, c.length);
                 }
             }
             return "";
@@ -38,7 +41,7 @@
         function getRandomArticle() {
             let index = Math.floor(Math.random() * Math.floor(articles.length));
             let article = articles.splice(index, 1);
-                        
+
             $("#article").text(article);
             createCookie(JSON.stringify(articles));
         }
@@ -57,7 +60,7 @@
 
                 e.preventDefault();
                 let title = $("#wiki_title").val();
-                if(!title || articles.includes(title)){
+                if (!title || articles.includes(title)) {
                     return false;
                 }
 
@@ -74,24 +77,24 @@
 
         //wiki
 
-        function returnArticle(title){
-            if(!title || articles.includes(title)){
-                    return false;
-                }
+        function returnArticle(title) {
+            if (!title || articles.includes(title)) {
+                return false;
+            }
 
 
 
-                articles.push(title);
-                createCookie(JSON.stringify(articles));
+            articles.push(title);
+            createCookie(JSON.stringify(articles));
 
 
-                $("#wiki_title").val("");
-                $("#articles").text(articles.length);
+            $("#wiki_title").val("");
+            $("#articles").text(articles.length);
         }
 
-        
-        
-    
+
+
+
     </script>
 
     <link rel="stylesheet" href="style.css">
@@ -100,6 +103,7 @@
 
 
 </head>
+
 <body>
     <a href="wikirandomizer.html">wiki randomizer</a>
     <div class="section">
@@ -110,18 +114,73 @@
         <div class="button_div">
             <button class="btn-primary" onclick="$('#form').submit()">Submit</button>
 
-            
+
             <button class="btn-success" onclick="getRandomArticle()">Random</button>
-                        
+
         </div>
 
-        
+
         <a onclick="getRandomTitle()">Add random</button>
 
 
-    </div>
-    <p>Articles: <span id="articles"></span></p>
+            
 
+    </div>
+    <button onclick="install()">
+            Install
+        </button>
+    <p>Articles: <span id="articles"></span></p>
+    <script>
+        // This is the "Offline page" service worker
+
+        // Add this below content to your HTML page, or add the js file to your page at the very top to register service worker
+
+        // Check compatibility for the browser we're running this in
+        if ("serviceWorker" in navigator) {
+            if (navigator.serviceWorker.controller) {
+                console.log("[PWA Builder] active service worker found, no need to register");
+            } else {
+                // Register the service worker
+                navigator.serviceWorker
+                    .register("pwabuilder-sw.js", {
+                        scope: "./"
+                    })
+                    .then(function (reg) {
+                        console.log("[PWA Builder] Service worker has been registered for scope: " + reg.scope);
+                    });
+            }
+        }
+    </script>
+    <script>
+        let deferredPrompt = null;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent Chrome 67 and earlier from automatically showing the prompt
+            e.preventDefault();
+            // Stash the event so it can be triggered later.
+            deferredPrompt = e;
+        });
+
+        async function install() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                console.log(deferredPrompt)
+                deferredPrompt.userChoice.then(function (choiceResult) {
+
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('Your PWA has been installed');
+                    } else {
+                        console.log('User chose to not install your PWA');
+                    }
+
+                    deferredPrompt = null;
+
+                });
+
+
+            }
+        }
+    </script>
 </body>
 
 </html>

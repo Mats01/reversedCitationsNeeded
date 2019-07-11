@@ -1,0 +1,15 @@
+{
+    "name": "Reversed Citations Needed",
+    "short_name": "CitationsNeeded",
+    "description": "A tool to make Tom Scott's reversed Citation Needed more fun to play",
+    "start_url": "https://mats01.github.io/reversedCitationsNeeded/",
+    "display": "standalone",
+    "orientation": "landscape",
+    "lang": "English",
+    "icons": [
+        {
+            "src": "favicon.png",
+            "sizes": "1024x1024"
+        }
+    ]
+}
