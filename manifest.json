@@ -6,7 +6,7 @@
     "description": "A tool to make Tom Scott's reversed Citation Needed more fun to play",
     "start_url": "https://mats01.github.io/reversedCitationsNeeded/",
     "display": "standalone",
-    "orientation": "landscape",
+    "orientation": "portrait",
     "lang": "English",
     "icons": [
         {
