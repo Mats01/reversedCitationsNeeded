@@ -4,13 +4,13 @@
     "theme_color": "#ffffff",
     "background_color": "#ffffff",
     "description": "A tool to make Tom Scott's reversed Citation Needed more fun to play",
-    "start_url": "https://reversedcitationsneeded.farmoredifferent.com/",
+    "start_url": "https://rcn.farmoredifferent.com/",
     "display": "standalone",
     "orientation": "portrait",
     "lang": "English",
     "icons": [
         {
-            "src": "https://reversedcitationsneeded.farmoredifferent.com/favicon.png",
+            "src": "https://rcn.farmoredifferent.com/favicon.png",
             "sizes": "1024x1024"
         }
     ]
